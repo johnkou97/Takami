@@ -85,6 +85,20 @@ if os.path.exists('results/linear'):
 else:
     os.mkdir('results/linear')
 
+if os.path.exists('results/3fig'):
+    pass
+else:
+    os.mkdir('results/3fig')
+
+if os.path.exists('results/3fig/linear'):
+    pass
+else:
+    os.mkdir('results/3fig/linear')
+
+if os.path.exists('results/3fig/log'):
+    pass
+else:
+    os.mkdir('results/3fig/log')
 
 for eos in EOS:
 
@@ -145,9 +159,44 @@ for eos in EOS:
                     fig=plt.figure()
                     plt.plot(fq*Frequency,fd)
                     plt.xlim(0,5000)
+                    plt.ylim(10**(-6),1)
                     plt.yscale('log')
                     plt.xlabel('frequency (Hz)')
                     plt.savefig('results/log/'+name+'.jpg')
+                    plt.close()
+
+                    fig=plt.figure()
+                    plt.subplot(212)
+                    plt.plot((fq*Frequency),fd)
+
+                    plt.xlim(0,5000)
+                    plt.xlabel('Frequency (Hz)')
+                    plt.legend(['Postmerger only'])
+                    plt.subplot(222)
+                    plt.plot(tim,dat)
+                    plt.title('Postmerger')
+                    plt.subplot(221)
+                    plt.plot(time,rh)
+                    plt.title('Time Domain')
+                    plt.savefig('results/3fig/linear/'+name+'.jpg')
+                    plt.close()
+
+
+                    fig=plt.figure()
+                    plt.subplot(212)
+                    plt.plot((fq*Frequency),fd)
+                    plt.yscale('log')
+                    plt.xlim(0,5000)
+                    plt.ylim(10**(-6),1)
+                    plt.xlabel('Frequency (Hz)')
+                    plt.legend(['Postmerger only'])
+                    plt.subplot(222)
+                    plt.plot(tim,dat)
+                    plt.title('Postmerger')
+                    plt.subplot(221)
+                    plt.plot(time,rh)
+                    plt.title('Time Domain')
+                    plt.savefig('results/3fig/log/'+name+'.jpg')
                     plt.close()
                 except OSError:
                     pass
