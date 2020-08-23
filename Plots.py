@@ -173,7 +173,7 @@ for eos in EOS:
 
                     rh=np.empty(len(rh1))
                     for i in range(len(rh1)):
-                        rh[i]=rh1[i]+rh2[i]
+                        rh[i]=rh1[i]
 
 
 
@@ -276,7 +276,7 @@ for eos in EOS:
 
                     rh=np.empty(len(rh1))
                     for i in range(len(rh1)):
-                        rh[i]=rh1[i]+rh2[i]
+                        rh[i]=rh1[i]
 
 
 
