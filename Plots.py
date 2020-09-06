@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import CubicSpline as spline
 from scipy.fftpack import fft, fftshift ,ifft,rfft,fftfreq,rfftfreq
 import os
+import pywt
 c=2.9979e10
 G=6.67408e-8
 Msun=1.989e33
@@ -135,6 +136,10 @@ if os.path.exists('results/q1/log'):
 else:
     os.mkdir('results/q1/log')
 
+if os.path.exists('results/spec'):
+    pass
+else:
+    os.mkdir('results/spec')
 
 
 #q=1
@@ -233,6 +238,8 @@ for eos in EOS:
                     plt.xlabel('frequency (Hz)')
                     plt.savefig('results/q1/log/'+name+'.jpg')
                     plt.close()
+
+
 
 
                 except OSError:
@@ -370,5 +377,22 @@ for eos in EOS:
                     plt.title('Time Domain')
                     plt.savefig('results/3fig/log/'+name+'.jpg')
                     plt.close()
+
+
+                    fc = f_p_a
+                    dt=(tim[1]-tim[0])*Time*1000
+                    band = 2.5
+                    wavelet = 'cmor'+str(band)+'-'+str(fc)
+                    widths = fc/np.linspace(fc-1.0, fc+1.0, 400)/dt
+                    cwtmatr, freqs = pywt.cwt(dat, widths, wavelet, dt)
+                    power = abs(cwtmatr)
+
+                    fig, ax = plt.subplots(figsize=(10, 6), dpi=150)
+                    ax.pcolormesh(tim, freqs, power,cmap='jet')
+                    plt.savefig('results/spec/'+name+'.jpg')
+                    plt.close()
+
+
+
                 except OSError:
                     pass
