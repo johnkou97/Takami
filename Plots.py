@@ -310,6 +310,14 @@ for eos in EOS:
 
                     fq,fd,tim,dat=analyze(rh,time,mass)
 
+                    timems=np.zeros(len(tim))
+                    for i in range(len(timems)):
+                        timems[i]=tim[i]*Time*1000
+
+
+                    timeMS=np.zeros(len(time))
+                    for i in range(len(timeMS)):
+                        timeMS[i]=time[i]*Time*1000
 
                     fig=plt.figure()
                     plt.plot(fq*Frequency,fd)
@@ -352,10 +360,10 @@ for eos in EOS:
                     plt.xlabel('Frequency (Hz)')
                     plt.legend(['Postmerger only'])
                     plt.subplot(222)
-                    plt.plot(tim,dat)
+                    plt.plot(timems,dat)
                     plt.title('Postmerger')
                     plt.subplot(221)
-                    plt.plot(time,rh)
+                    plt.plot(timeMS,rh)
                     plt.title('Time Domain')
                     plt.savefig('results/3fig/linear/'+name+'.jpg')
                     plt.close()
@@ -370,10 +378,10 @@ for eos in EOS:
                     plt.xlabel('Frequency (Hz)')
                     plt.legend(['Postmerger only'])
                     plt.subplot(222)
-                    plt.plot(tim,dat)
+                    plt.plot(timems,dat)
                     plt.title('Postmerger')
                     plt.subplot(221)
-                    plt.plot(time,rh)
+                    plt.plot(timeMS,rh)
                     plt.title('Time Domain')
                     plt.savefig('results/3fig/log/'+name+'.jpg')
                     plt.close()
@@ -388,7 +396,7 @@ for eos in EOS:
                     power = abs(cwtmatr)
 
                     fig, ax = plt.subplots(figsize=(10, 6), dpi=150)
-                    ax.pcolormesh(tim, freqs, power,cmap='jet')
+                    ax.pcolormesh(timems, freqs, power,cmap='jet')
                     plt.savefig('results/spec/'+name+'.jpg')
                     plt.close()
 
