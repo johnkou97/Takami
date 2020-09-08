@@ -391,12 +391,14 @@ for eos in EOS:
                     dt=(tim[1]-tim[0])*Time*1000
                     band = 2.5
                     wavelet = 'cmor'+str(band)+'-'+str(fc)
-                    widths = fc/np.linspace(fc-1.0, fc+1.0, 400)/dt
+                    widths = fc/np.linspace(fc-1.0, fc+1.0, 5000)/dt
                     cwtmatr, freqs = pywt.cwt(dat, widths, wavelet, dt)
                     power = abs(cwtmatr)
 
                     fig, ax = plt.subplots(figsize=(10, 6), dpi=150)
                     ax.pcolormesh(timems, freqs, power,cmap='jet')
+                    plt.xlabel('Time(ms)')
+                    plt.ylabel('Frequency(Hz)')
                     plt.savefig('results/spec/'+name+'.jpg')
                     plt.close()
 
