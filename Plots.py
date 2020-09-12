@@ -4,6 +4,7 @@ import math
 import scipy
 from scipy import signal
 import matplotlib.pyplot as plt
+import matplotlib.colors as colors
 from scipy.interpolate import CubicSpline as spline
 from scipy.fftpack import fft, fftshift ,ifft,rfft,fftfreq,rfftfreq
 import os
@@ -141,6 +142,15 @@ if os.path.exists('results/spec'):
 else:
     os.mkdir('results/spec')
 
+if os.path.exists('results/spec/linear'):
+    pass
+else:
+    os.mkdir('results/spec/linear')
+
+if os.path.exists('results/spec/log'):
+    pass
+else:
+    os.mkdir('results/spec/log')
 
 #q=1
 q='10'
@@ -387,11 +397,11 @@ for eos in EOS:
                     plt.close()
 
 
-                    fc = f_p_a
+                    fc = 3.0
                     dt=(tim[1]-tim[0])*Time*1000
                     band = 2.5
                     wavelet = 'cmor'+str(band)+'-'+str(fc)
-                    widths = fc/np.linspace(fc-1.0, fc+1.0, 5000)/dt
+                    widths = fc/np.linspace(fc-2.0, fc+2.0, 400)/dt
                     cwtmatr, freqs = pywt.cwt(dat, widths, wavelet, dt)
                     power = abs(cwtmatr)
 
@@ -399,7 +409,14 @@ for eos in EOS:
                     ax.pcolormesh(timems, freqs, power,cmap='jet')
                     plt.xlabel('Time(ms)')
                     plt.ylabel('Frequency(Hz)')
-                    plt.savefig('results/spec/'+name+'.jpg')
+                    plt.savefig('results/spec/linear/'+name+'.jpg')
+                    plt.close()
+
+                    fig, ax = plt.subplots(figsize=(10, 6), dpi=150)
+                    ax.pcolormesh(timems, freqs, power,norm=colors.LogNorm(0.01,1.2),cmap='jet')
+                    plt.xlabel('Time(ms)')
+                    plt.ylabel('Frequency(Hz)')
+                    plt.savefig('results/spec/log/'+name+'.jpg')
                     plt.close()
 
 
