@@ -5,6 +5,8 @@ import scipy
 from scipy import signal
 import matplotlib.pyplot as plt
 import matplotlib.colors as colors
+from matplotlib.ticker import (MultipleLocator, FormatStrFormatter,
+                               AutoMinorLocator)
 from scipy.interpolate import CubicSpline as spline
 from scipy.fftpack import fft, fftshift ,ifft,rfft,fftfreq,rfftfreq
 import os
@@ -228,6 +230,8 @@ for eos in EOS:
                     ax.axvline((f_0*Mc)*1000,linestyle="--",color='grey',label='2+0')
                     plt.xlim(0,5000)
                     plt.xlabel('frequency (Hz)')
+                    ax.xaxis.set_major_locator(MultipleLocator(500))
+                    ax.xaxis.set_minor_locator(MultipleLocator(100))
                     plt.savefig('results/q1/linear/'+name+'.jpg')
                     plt.close()
 
@@ -246,6 +250,8 @@ for eos in EOS:
                     plt.ylim(10**(-6),1)
                     plt.yscale('log')
                     plt.xlabel('frequency (Hz)')
+                    ax.xaxis.set_major_locator(MultipleLocator(500))
+                    ax.xaxis.set_minor_locator(MultipleLocator(100))
                     plt.savefig('results/q1/log/'+name+'.jpg')
                     plt.close()
 
@@ -341,6 +347,8 @@ for eos in EOS:
                     ax.axvline((f_0_a*Mc)*1000,linestyle="--",color='grey',label='2+0')
                     plt.xlim(0,5000)
                     plt.xlabel('frequency (Hz)')
+                    ax.xaxis.set_major_locator(MultipleLocator(500))
+                    ax.xaxis.set_minor_locator(MultipleLocator(100))
                     plt.savefig('results/linear/'+name+'.jpg')
                     plt.close()
 
@@ -359,6 +367,8 @@ for eos in EOS:
                     plt.ylim(10**(-6),1)
                     plt.yscale('log')
                     plt.xlabel('frequency (Hz)')
+                    ax.xaxis.set_major_locator(MultipleLocator(500))
+                    ax.xaxis.set_minor_locator(MultipleLocator(100))
                     plt.savefig('results/log/'+name+'.jpg')
                     plt.close()
 
@@ -409,6 +419,10 @@ for eos in EOS:
                     ax.pcolormesh(timems, freqs, power,cmap='jet')
                     plt.xlabel('Time(ms)')
                     plt.ylabel('Frequency(Hz)')
+                    ax.xaxis.set_major_locator(MultipleLocator(1))
+                    ax.xaxis.set_minor_locator(MultipleLocator(.2))
+                    ax.yaxis.set_major_locator(MultipleLocator(.5))
+                    ax.yaxis.set_minor_locator(MultipleLocator(.1))
                     plt.savefig('results/spec/linear/'+name+'.jpg')
                     plt.close()
 
@@ -416,6 +430,10 @@ for eos in EOS:
                     ax.pcolormesh(timems, freqs, power,norm=colors.LogNorm(0.01,1.2),cmap='jet')
                     plt.xlabel('Time(ms)')
                     plt.ylabel('Frequency(Hz)')
+                    ax.xaxis.set_major_locator(MultipleLocator(1))
+                    ax.xaxis.set_minor_locator(MultipleLocator(.2))
+                    ax.yaxis.set_major_locator(MultipleLocator(.5))
+                    ax.yaxis.set_minor_locator(MultipleLocator(.1))
                     plt.savefig('results/spec/log/'+name+'.jpg')
                     plt.close()
 
