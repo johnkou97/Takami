@@ -1,6 +1,6 @@
 # Scripts and notebooks for analyzing gravitational waves from Binary Neutron Star Mergers.
 
-## Data taken from Dr. Takami's Gravitational-Waveform [Catalog](http://www2.yukawa.kyoto-u.ac.jp/~nr_kyoto/SACRA_PUB/catalog.html) 
+## Data taken from Dr. Takami's Gravitational-Waveform [Catalog](http://www.kobe-kosen.ac.jp/~takami/KTakami/contents/research/public_data/GW_Catalog/GW_Catalog_en.html) 
 ## Producing Fourier transformations and spectrograms of postmerger phase
 
 ### The project contains the following files:
